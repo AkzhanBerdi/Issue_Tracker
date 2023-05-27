@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h5 class="card-header">{{ status.title }}</h5>
+    <div class="card-body">
+      <h5 class="card-title" style= "font-size: 20px;">{{ issue.title }}</h5>
+      <p class="card-text" style= "font-size: 18px; background-color: rgb(229, 210, 210);"> {{ issue.description }}</p>
+      <a href="#" class="btn btn-danger"> Close issue </a>
+      <a href="#" class="btn btn-success"> Edit issue </a>
+      <a href="#" class="btn btn-primary"> Go back </a>
+    </div>
+  </div>
+  {% endblock %}
