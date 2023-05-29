@@ -1,0 +1,21 @@
+<div class="input-group input-group-lg">
+    <label class="input-group-text text-start" for="id_type">Choose type:</label>
+    <!-- <select class="form-select" id="id_type", name="type">
+        <option selected disabled>Choose type</option>
+        {% for type in form.type.field.queryset %}
+            <option value="{{ type.type }}">{{ type.type }}</option> 
+        {% endfor %} 
+    </select> -->
+    {{ form.type }}
+</div>
+
+<div class="input-group input-group-lg">
+    <label class="input-group-text text-start" for="id_status">Choose type:</label>
+    <!-- <select class="form-select" id="id_status", name="type">
+        <option selected disabled>Choose status</option>
+        {% for status in form.status.field.queryset %}
+            <option value="{{ status.status }}">{{ status.status }}</option> 
+        {% endfor %} 
+    </select> -->
+    {{ form.status }}
+</div>

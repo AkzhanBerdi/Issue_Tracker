@@ -19,6 +19,8 @@ from tracker.views import (
     CustomTemplateView, 
     CustomDetailView, 
     CustomCreateView,
+    CustomEditView,
+    CustomDeleteView,
     index_view
 )
 
@@ -29,4 +31,6 @@ urlpatterns = [
     path('list', CustomTemplateView.as_view(), name='issue_list'),
     path('detail/<int:pk>', CustomDetailView.as_view(), name='issue_detail'),
     path('create', CustomCreateView.as_view(), name='issue_create'),
+    path('edit/<int:pk>', CustomEditView.as_view(), name='issue_edit'),
+    path('delete/<int:pk>', CustomDeleteView.as_view(), name='issue_delete'),
 ]

@@ -1,17 +1,24 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import TemplateView
-from .models import Issue, Status
+from django.views.generic import TemplateView, DeleteView, ListView
+from .models import Issue, Status, Type
 from .forms import IssueForm
+from django.views import View
+from django.urls import reverse_lazy
 
 # Create your views here.
 def index_view(request):
     return render(request, 'index.html')
 
-class CustomTemplateView(TemplateView):
-    issue = Issue.objects.all()
+class CustomTemplateView(ListView):
+    # issue = Issue.objects.all()
     
-    def get(self, request, *args, **kwargs):
-        return render(request, 'index.html', context={'issue': self.issue})
+    # def get(self, request, *args, **kwargs):
+    #     return render(request, 'index.html', context={'issue': self.issue})
+    model = Issue
+    template_name = 'list.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(is_closed=False)
 
 
 class CustomDetailView(TemplateView):
@@ -24,39 +31,55 @@ class CustomDetailView(TemplateView):
                         'detail.html', 
                         context={
                                 'issue': issue
-                                # 'status': status
+                                 #'status': status
                                 }
                     )
 
-class CustomCreateView(TemplateView):
+class CustomCreateView(View):
     template_name = 'create.html'
 
-    def get_name(request):
-        if request.method == 'POST':
-            if form.is_valid():
-                issue = Issue.objects.all()
-                title = request.POST.get('title')
-                description = request.POST.get('description')
-                _type = request.POST.get('_type')
-                status = request.POST.get('status')
-                Issue.objects.create(title=title, description=description, _type=_type, status=status)
-                return redirect("main")
+    def get(self, request):
+        form = IssueForm()
+        return render(request, self.template_name, {'form': form})
 
+    def post(self, request):
+        form = IssueForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('issue_list')
         else:
-            form = IssueForm()
-
-            return render(request, 'create.html', {'form':form})
+            return redirect('main')
 
 
-    # type_choices = [
-    #     'Task',
-    #     'Bug',
-    #     'Enhancement',
-    # ]
+class CustomEditView(View):
+    template_name = 'edit.html'
 
-    # status_choices = [
-    #     'New',
-    #     'In Progress',
-    #     'Done',
-    # ]
+    def get(self, request, pk):
+        issue = Issue.objects.get(pk=pk)
+        form = IssueForm(instance=issue)
+        return render(request, self.template_name, {'form': form, 'issue': issue})
 
+    def post(self, request, pk):
+        issue = Issue.objects.get(pk=pk)
+        form = IssueForm(request.POST, instance=issue)
+        if form.is_valid():
+            form.save()
+            issue.save()
+            return redirect('issue_list')
+        return redirect('home')
+
+class CustomDeleteView(DeleteView):
+    model = Issue
+    template_name = 'delete.html'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect('issue_list')
+
+# class CustomListView(ListView):
+#     model = Issue
+#     template_name = 'list.html'
+
+#     def get_queryset(self):
+#         return self.model.objects.filter(is_deleted=False)

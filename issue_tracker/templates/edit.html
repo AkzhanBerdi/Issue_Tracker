@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="{% url 'issue_create' %}" method="post">
+<form action="{% url 'issue_create' %}" method="POST">
     {% csrf_token %}
 <div class="input-group mb-3">
 <div class="container" style="width:50%">
@@ -12,33 +12,35 @@
 
     <div class="input-group input-group-lg">
         <label class="input-group-text text-start" for="description">Description: </label>
-        <input id="description" type="text" name="description">
+        <input class="my-class" id="description" type="text" name="description">
     </div>
 
-    <div class="input-group input-group-lg">
-        <label class="input-group-text text-start" for="_type">Choose type: </label>
-        <select class="form-select" id="type" name="type">
-            <option selected-disabled> Choose type </option>
-            <option value="Task"> Task </option>
-            <option value="Bug"> Bug </option>
-            <option value="Enhancement"> Enhancement </option>
-        </select>
-    </div>
+{% include "./partial_form.html" %}
 
-    <div class="input-group input-group-lg">
-        <label class="input-group-text text-start" for="status">Choose status: </label>
-        <select class="form-select" id="status" name="status">
-            <option selected-disabled> Choose status </option>
-            <option value="New"> New </option>
-            <option value="In Progress"> In Progress </option>
-            <option value="Done"> Done </option>
-        </select>
-    </div>
 
-    {{ form }}
-    <input type="submit" value="Submit">
-    <input type="button" value="Go back!" onclick="history.back()">
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        <a href="{% url 'main' %}" class="btn btn-secondary">Cancel</button>
+    </div>
 </div>
 </form>
+
+
+
+
+
+<!-- <div class="container">
+    <form method="POST">
+      <fieldset>
+        <legend>Form</legend>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </fieldset>
+    </form>
+</div>
+ -->
+
+
 
 {% endblock %}
