@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import TemplateView, DeleteView, ListView
+from django.views.generic import TemplateView, DeleteView, ListView, UpdateView
 from .models import Issue, Status, Type
 from .forms import IssueForm
 from django.views import View
@@ -51,7 +51,7 @@ class CustomCreateView(View):
             return redirect('main')
 
 
-class CustomEditView(View):
+class CustomEditView(UpdateView):
     template_name = 'edit.html'
 
     def get(self, request, pk):
@@ -64,9 +64,9 @@ class CustomEditView(View):
         form = IssueForm(request.POST, instance=issue)
         if form.is_valid():
             form.save()
-            issue.save()
             return redirect('issue_list')
-        return redirect('home')
+        print(form.errors)
+        return redirect('main')
 
 class CustomDeleteView(DeleteView):
     model = Issue

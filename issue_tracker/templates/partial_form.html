@@ -1,6 +1,6 @@
 <div class="input-group input-group-lg">
     <label class="input-group-text text-start" for="id_type">Choose type:</label>
-    <!-- <select class="form-select" id="id_type", name="type">
+    <!-- <select class="form-select" id="id_type" name="type"value="{{ form.type }}">
         <option selected disabled>Choose type</option>
         {% for type in form.type.field.queryset %}
             <option value="{{ type.type }}">{{ type.type }}</option> 
@@ -11,7 +11,7 @@
 
 <div class="input-group input-group-lg">
     <label class="input-group-text text-start" for="id_status">Choose type:</label>
-    <!-- <select class="form-select" id="id_status", name="type">
+    <!-- <select class="form-select" id="id_status" name="type" value="{{ form.status }}">
         <option selected disabled>Choose status</option>
         {% for status in form.status.field.queryset %}
             <option value="{{ status.status }}">{{ status.status }}</option> 

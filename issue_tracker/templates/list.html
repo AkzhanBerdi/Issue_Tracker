@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
   <h1>Issue List</h1>
   <ul>
     {% for issue in issue_list %}
-      <li>{{ issue.title }}</li>
+      <a href="{% url 'issue_detail' issue.pk %}" class="list-group-item"
+      style= "font-size: 18px; background-color: rgb(88, 211, 201);">
+        <span> {{ issue.title }} </span>
+      </a>
       <li>{{ issue.description }}</li>
       <li>Created: {{ issue.created_at }}</li>
       <li>Updated: {{ issue.updated_at }}</li>
       <a href="{% url 'issue_delete' issue.pk %}" class="btn btn-danger"> Close issue </a>
       <a href="{% url 'issue_edit' issue.pk %}" class="btn btn-success"> Edit issue </a>
-      <a href="{% url 'issue_list' %}" class="btn btn-primary"> Go back </a>
       <hr>
     {% empty %}
       <li>No issues found.</li>
     {% endfor %}
   </ul>
+</div>
 {% endblock %}
