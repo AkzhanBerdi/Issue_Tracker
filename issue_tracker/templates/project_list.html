@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="wrapper">
+    <div class="container">
         <article class="flow">
-    <h1> Hello, World! </h1>
-    <h3> Here is your list of projects !</h3>
+    <h1 style="text-align: center;"> Hello, Akzhan! </h1>
+    <h3 style="text-align: center;"> Here is the list of projects you are working on right now !</h3>
     {% for project in project_list %}
     
-    <a href="{% url 'project_detail' project.pk %}" class="list-group-item">{{ project.name }}</a>
+    <a href="{% url 'project_detail' project.pk %}" style="font-size: 20px; text-align: center;" class="list-group-item special-link">{{ project.name }}</a>
     
     {% endfor %}
 </article>
-<a href="{% url 'project_create' %}" class="btn btn-success">New Project</button>
+<a href="{% url 'project_create' %}" class="btn btn-success" style="display: flex; justify-content: center;">New Project</a>
 </div>
 {% endblock %}

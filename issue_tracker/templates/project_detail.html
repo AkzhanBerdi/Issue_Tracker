@@ -5,8 +5,8 @@
       <div class="card-body">
         <h5 class="card-title" style= "font-size: 20px;">{{ project.name }}</h5>
         <p class="card-text" style= "font-size: 18px; background-color: rgb(229, 210, 210);"> {{ project.description }}</p>
-        <a href="#" class="btn btn-danger"> Close project </a>
-        <a href="#" class="btn btn-success"> Edit project </a>
+        <a href="{% url 'project_delete' project.pk %}" class="btn btn-danger"> Close project </a>
+        <a href="{% url 'project_edit' project.pk %}" class="btn btn-success"> Edit project </a>
         <a href="{% url 'main' %}" class="btn btn-primary"> Go back </a>
       </div>
     <div>

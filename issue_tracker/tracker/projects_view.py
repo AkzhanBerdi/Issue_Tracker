@@ -57,3 +57,30 @@ class ProjectDetailView(FormMixin, DetailView):
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.pk})
+
+class ProjectEditView(UpdateView):
+    template_name = 'project_edit.html'
+
+    def get(self, request, pk):
+        project = Project.objects.get(pk=pk)
+        form = ProjectForm(instance=project)
+        return render(request, self.template_name, {'form': form, 'project': project})
+    
+    def post(self, request, pk):
+        project = Project.objects.get(pk=pk)
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+        print(form.errors)
+        return redirect('main')
+
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+    template_name = 'project_delete.html'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect('main')

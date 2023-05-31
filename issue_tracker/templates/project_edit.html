@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{% url 'project_edit' project.pk %}" method="POST">
+    {% csrf_token %}
+<div class="input-group mb-3">
+<div class="container" style="width:50%">
+
+
+{% include "./partial_project_form.html" %}
+
+
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        <a href="{% url 'main' %}" class="btn btn-secondary">Cancel</button>
+    </div>
+</div>
+</form>
+
+
+
+
+{% endblock %}

@@ -11,9 +11,9 @@
 <body>
     <nav class="navbar bg-body-tertiary">
         <form class="container-fluid justify-content-start">
-          <a href="{% url 'main' %}" class="btn btn-outline-success me-5" type="button">Main</a>
-          <a href="{% url 'issue_create' %}" class="btn btn-outline-success me-5" type="button">New</a>
-          <a href="{% url 'issue_list' %}" class="btn btn-outline-secondary" type="button">List</a>
+          <a href="{% url 'main' %}" class="btn btn-outline-success me-5" type="button">Projects</a>
+          <!-- <a href="{% url 'issue_create' %}" class="btn btn-outline-success me-5" type="button">New</a> -->
+          <a href="{% url 'issue_list' %}" class="btn btn-outline-success me-5" type="button">Issues</a>
         </form>
     </nav>
     {% block content %} {% endblock %}

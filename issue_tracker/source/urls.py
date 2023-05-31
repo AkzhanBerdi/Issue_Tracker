@@ -25,7 +25,9 @@ from tracker.issues_view import (
 from tracker.projects_view import (
     ProjectView,
     ProjectDetailView,
-    ProjectCreateView
+    ProjectCreateView,
+    ProjectDeleteView,
+    ProjectEditView
 )
 
 
@@ -35,6 +37,8 @@ urlpatterns = [
 
     path('project_detail/<int:pk>', ProjectDetailView.as_view(), name='project_detail'),
     path('project_create', ProjectCreateView.as_view(), name='project_create'),
+    path('project_delete/<int:pk>', ProjectDeleteView.as_view(), name='project_delete'),
+    path('project_edit/<int:pk>', ProjectEditView.as_view(), name='project_edit'),
 
     path('issue_list', IssueTemplateView.as_view(), name='issue_list'),
     path('issue_detail/<int:pk>', IssueDetailView.as_view(), name='issue_detail'),
@@ -42,5 +46,3 @@ urlpatterns = [
     path('issue_edit/<int:pk>', IssueEditView.as_view(), name='issue_edit'),
     path('issue_delete/<int:pk>', IssueDeleteView.as_view(), name='issue_delete'),
 ]
-
-

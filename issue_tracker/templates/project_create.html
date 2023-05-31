@@ -5,23 +5,9 @@
     {% csrf_token %}
 <div class="input-group mb-3">
 <div class="container" style="width:50%">
-    <!-- <div container="" class="input-group input-group-lg">
-        <label class ="input-group-text text-start" for="title">Project's name: </label>
-        <input id="title" type="text" name="title">
-    </div>
 
-    <div class="input-group input-group-lg">
-        <label class="input-group-text text-start" for="description">Project's description: </label>
-        <input class="my-class" id="description" type="text" name="description">
-    </div> -->
 
 {% include "./partial_project_form.html" %}
-
-
-    <!-- <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary me-2">Submit</button>
-        <a href="{% url 'main' %}" class="btn btn-secondary">Cancel</button>
-    </div> -->
 
 </div>
 </div>
