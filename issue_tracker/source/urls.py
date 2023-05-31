@@ -15,22 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from tracker.views import (
-    CustomTemplateView, 
-    CustomDetailView, 
-    CustomCreateView,
-    CustomEditView,
-    CustomDeleteView,
-    index_view
+from tracker.issues_view import (
+    IssueTemplateView, 
+    IssueDetailView, 
+    IssueCreateView,
+    IssueEditView,
+    IssueDeleteView,
+)
+from tracker.projects_view import (
+    ProjectView,
+    ProjectDetailView,
+    ProjectCreateView
 )
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_view, name='main'),
-    path('list', CustomTemplateView.as_view(), name='issue_list'),
-    path('detail/<int:pk>', CustomDetailView.as_view(), name='issue_detail'),
-    path('create', CustomCreateView.as_view(), name='issue_create'),
-    path('edit/<int:pk>', CustomEditView.as_view(), name='issue_edit'),
-    path('delete/<int:pk>', CustomDeleteView.as_view(), name='issue_delete'),
+    path('', ProjectView.as_view(), name='main'),
+
+    path('project_detail/<int:pk>', ProjectDetailView.as_view(), name='project_detail'),
+    path('project_create', ProjectCreateView.as_view(), name='project_create'),
+
+    path('issue_list', IssueTemplateView.as_view(), name='issue_list'),
+    path('issue_detail/<int:pk>', IssueDetailView.as_view(), name='issue_detail'),
+    path('issue_create', IssueCreateView.as_view(), name='issue_create'),
+    path('issue_edit/<int:pk>', IssueEditView.as_view(), name='issue_edit'),
+    path('issue_delete/<int:pk>', IssueDeleteView.as_view(), name='issue_delete'),
 ]
+
+

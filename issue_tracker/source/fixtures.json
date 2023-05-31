@@ -467,6 +467,42 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add project",
+    "content_type": 10,
+    "codename": "add_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change project",
+    "content_type": 10,
+    "codename": "change_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete project",
+    "content_type": 10,
+    "codename": "delete_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view project",
+    "content_type": 10,
+    "codename": "view_project"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
@@ -557,6 +593,14 @@
   }
 },
 {
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "tracker",
+    "model": "project"
+  }
+},
+{
   "model": "sessions.session",
   "pk": "4nnwhny9ssvk1ex8jh00ddrlc2vehci1",
   "fields": {
@@ -568,42 +612,62 @@
   "model": "tracker.type",
   "pk": 1,
   "fields": {
-    "title": "Task"
+    "type": "Task"
   }
 },
 {
   "model": "tracker.type",
   "pk": 2,
   "fields": {
-    "title": "Bug"
+    "type": "Bug"
   }
 },
 {
   "model": "tracker.type",
   "pk": 3,
   "fields": {
-    "title": "Enhancement"
+    "type": "Enhancement"
   }
 },
 {
   "model": "tracker.status",
   "pk": 1,
   "fields": {
-    "title": "New"
+    "status": "New"
   }
 },
 {
   "model": "tracker.status",
   "pk": 2,
   "fields": {
-    "title": "In Progress"
+    "status": "In Progress"
   }
 },
 {
   "model": "tracker.status",
   "pk": 3,
   "fields": {
-    "title": "Done"
+    "status": "Done"
+  }
+},
+{
+  "model": "tracker.project",
+  "pk": 1,
+  "fields": {
+    "start_date": "2023-05-30",
+    "finish_date": null,
+    "name": "Issue Tracker test release",
+    "description": "develop the thing on your local machine"
+  }
+},
+{
+  "model": "tracker.project",
+  "pk": 2,
+  "fields": {
+    "start_date": "2023-05-30",
+    "finish_date": null,
+    "name": "test",
+    "description": "test"
   }
 },
 {
@@ -613,9 +677,11 @@
     "title": "Add functionality",
     "description": "Make some usefull functions",
     "status": 1,
-    "_type": 1,
+    "type": 1,
     "created_at": "2023-05-27",
-    "updated_at": "2023-05-27"
+    "updated_at": "2023-05-27",
+    "is_closed": false,
+    "project": 1
   }
 },
 {
@@ -625,9 +691,11 @@
     "title": "Improve Home Page",
     "description": "Make something special on the home page, we need a cath",
     "status": 2,
-    "_type": 3,
+    "type": 3,
     "created_at": "2023-05-27",
-    "updated_at": "2023-05-27"
+    "updated_at": "2023-05-27",
+    "is_closed": false,
+    "project": 1
   }
 },
 {
@@ -637,9 +705,11 @@
     "title": "Update the models",
     "description": "Update the models up to recent requirements and migrate it further ahead",
     "status": 3,
-    "_type": 1,
+    "type": 1,
     "created_at": "2023-05-27",
-    "updated_at": "2023-05-27"
+    "updated_at": "2023-05-27",
+    "is_closed": false,
+    "project": 1
   }
 },
 {
@@ -649,9 +719,11 @@
     "title": "Admin Panel displays Statuss instead of Status",
     "description": "Find out the cause and debug it",
     "status": 1,
-    "_type": 2,
+    "type": 2,
     "created_at": "2023-05-27",
-    "updated_at": "2023-05-27"
+    "updated_at": "2023-05-27",
+    "is_closed": false,
+    "project": 1
   }
 },
 {
@@ -661,9 +733,445 @@
     "title": "Continue developing an Issue Tracker",
     "description": "Keep working on your home work",
     "status": 2,
-    "_type": 1,
+    "type": 1,
     "created_at": "2023-05-27",
-    "updated_at": "2023-05-27"
+    "updated_at": "2023-05-27",
+    "is_closed": false,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 6,
+  "fields": {
+    "title": "Troubleshoot choose type/status",
+    "description": "Currently the form displays id per type and status when filling the form. It should be the string values from models not id, thank you!",
+    "status": 1,
+    "type": 3,
+    "created_at": "2023-05-28",
+    "updated_at": "2023-05-28",
+    "is_closed": false,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 7,
+  "fields": {
+    "title": "12313",
+    "description": "2323",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-28",
+    "updated_at": "2023-05-29",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 8,
+  "fields": {
+    "title": "clean up your buggy website",
+    "description": "definetly maybe",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-29",
+    "is_closed": false,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 9,
+  "fields": {
+    "title": "123",
+    "description": "123",
+    "status": 3,
+    "type": 3,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 10,
+  "fields": {
+    "title": "test2",
+    "description": "test2",
+    "status": 1,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 11,
+  "fields": {
+    "title": "test3",
+    "description": "test3",
+    "status": 1,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 12,
+  "fields": {
+    "title": "New Task",
+    "description": "Here is your new task I've just upgraded it",
+    "status": 1,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 13,
+  "fields": {
+    "title": "Yet another task",
+    "description": "Here is another update task for you, please ASAP",
+    "status": 1,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-29",
+    "is_closed": false,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 14,
+  "fields": {
+    "title": "11",
+    "description": "11",
+    "status": 1,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 15,
+  "fields": {
+    "title": "It's a new task",
+    "description": "for sure, please ASAP",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 16,
+  "fields": {
+    "title": "New issue from Boss",
+    "description": "Make it better",
+    "status": 1,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 17,
+  "fields": {
+    "title": "Easy Task",
+    "description": "This is very easy task",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": false,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 18,
+  "fields": {
+    "title": "18 task",
+    "description": "system has a bug, fix it !",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 19,
+  "fields": {
+    "title": "Task 18",
+    "description": "Definetly maybe!",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 20,
+  "fields": {
+    "title": "Task 7",
+    "description": "Theoretically it's the seventh issue",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 21,
+  "fields": {
+    "title": "Another seventh",
+    "description": "yeah yeah",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 22,
+  "fields": {
+    "title": "The seventh task",
+    "description": "This is your seven's task which is being troubleshoot for like infinity",
+    "status": 3,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 23,
+  "fields": {
+    "title": "seventh?",
+    "description": "1",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 24,
+  "fields": {
+    "title": "text field",
+    "description": "213r",
+    "status": 3,
+    "type": 2,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 25,
+  "fields": {
+    "title": "7",
+    "description": "1",
+    "status": 3,
+    "type": 2,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 26,
+  "fields": {
+    "title": "the seven",
+    "description": "1234",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 27,
+  "fields": {
+    "title": "7",
+    "description": "7",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 28,
+  "fields": {
+    "title": "7",
+    "description": "7",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 29,
+  "fields": {
+    "title": "29",
+    "description": "",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 30,
+  "fields": {
+    "title": "seven",
+    "description": "yo yo",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 31,
+  "fields": {
+    "title": "123eawe",
+    "description": "e13qwe",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 32,
+  "fields": {
+    "title": "sev",
+    "description": "",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-29",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 33,
+  "fields": {
+    "title": "Make it believable",
+    "description": "Just breath and keep going",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-30",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 34,
+  "fields": {
+    "title": "You see, it's easy",
+    "description": "Like a I told ya",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-30",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 35,
+  "fields": {
+    "title": "Seems easy, right?",
+    "description": "Boy o boy",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-30",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
+  }
+},
+{
+  "model": "tracker.issue",
+  "pk": 36,
+  "fields": {
+    "title": "Seemed easy",
+    "description": "d",
+    "status": 2,
+    "type": 1,
+    "created_at": "2023-05-30",
+    "updated_at": "2023-05-30",
+    "is_closed": true,
+    "project": 1
   }
 }
 ]

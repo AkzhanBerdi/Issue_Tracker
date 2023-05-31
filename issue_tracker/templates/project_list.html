@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="wrapper">
+        <article class="flow">
+    <h1> Hello, World! </h1>
+    <h3> Here is your list of projects !</h3>
+    {% for project in project_list %}
+    
+    <a href="{% url 'project_detail' project.pk %}" class="list-group-item">{{ project.name }}</a>
+    
+    {% endfor %}
+</article>
+<a href="{% url 'project_create' %}" class="btn btn-success">New Project</button>
+</div>
+{% endblock %}

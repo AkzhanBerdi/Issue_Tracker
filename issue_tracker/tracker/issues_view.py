@@ -1,42 +1,28 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import TemplateView, DeleteView, ListView, UpdateView
-from .models import Issue, Status, Type
+from django.views.generic import TemplateView, DeleteView, ListView, UpdateView, DetailView
+from .models import Issue, Status, Type, Project
 from .forms import IssueForm
 from django.views import View
 from django.urls import reverse_lazy
 
 # Create your views here.
-def index_view(request):
-    return render(request, 'index.html')
 
-class CustomTemplateView(ListView):
-    # issue = Issue.objects.all()
-    
-    # def get(self, request, *args, **kwargs):
-    #     return render(request, 'index.html', context={'issue': self.issue})
+class IssueTemplateView(ListView):
     model = Issue
-    template_name = 'list.html'
+    template_name = 'issue_list.html'
 
     def get_queryset(self):
         return self.model.objects.filter(is_closed=False)
 
 
-class CustomDetailView(TemplateView):
+class IssueDetailView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         issue = get_object_or_404(Issue, pk=kwargs.get('pk'))
-        # status = get_object_or_404(Status, pk=kwargs.get('pk'))
-        return render(
-                        request, 
-                        'detail.html', 
-                        context={
-                                'issue': issue
-                                 #'status': status
-                                }
-                    )
+        return render(request, 'issues_detail.html', context={'issue': issue})
 
-class CustomCreateView(View):
-    template_name = 'create.html'
+class IssueCreateView(View):
+    template_name = 'issue_create.html'
 
     def get(self, request):
         form = IssueForm()
@@ -51,8 +37,8 @@ class CustomCreateView(View):
             return redirect('main')
 
 
-class CustomEditView(UpdateView):
-    template_name = 'edit.html'
+class IssueEditView(UpdateView):
+    template_name = 'issue_edit.html'
 
     def get(self, request, pk):
         issue = Issue.objects.get(pk=pk)
@@ -68,18 +54,11 @@ class CustomEditView(UpdateView):
         print(form.errors)
         return redirect('main')
 
-class CustomDeleteView(DeleteView):
+class IssueDeleteView(DeleteView):
     model = Issue
-    template_name = 'delete.html'
+    template_name = 'issue_delete.html'
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
         return redirect('issue_list')
-
-# class CustomListView(ListView):
-#     model = Issue
-#     template_name = 'list.html'
-
-#     def get_queryset(self):
-#         return self.model.objects.filter(is_deleted=False)

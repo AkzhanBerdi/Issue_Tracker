@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h5 class="card-header">{{ project.name }}</h5>
+      <div class="card-body">
+        <h5 class="card-title" style= "font-size: 20px;">{{ project.name }}</h5>
+        <p class="card-text" style= "font-size: 18px; background-color: rgb(229, 210, 210);"> {{ project.description }}</p>
+        <a href="#" class="btn btn-danger"> Close project </a>
+        <a href="#" class="btn btn-success"> Edit project </a>
+        <a href="{% url 'main' %}" class="btn btn-primary"> Go back </a>
+      </div>
+    <div>
+        <form method="POST" class="post-form">{% csrf_token %}
+          {{ form.as_p}}
+          <button type="submit" class="save btn btn-default">Send</button>
+        </form>
+    </div>
+    <div>
+      <ul>
+        {% for issue in issue %}
+          <a href="{% url 'issue_detail' issue.pk %}" class="list-group-item"
+          style= "font-size: 18px; background-color: rgb(88, 211, 201);">
+            <span> {{ issue.title }} </span>
+          </a>
+          <li>{{ issue.description }}</li>
+          <li>Created: {{ issue.created_at }}</li>
+          <li>Updated: {{ issue.updated_at }}</li>
+          <a href="{% url 'issue_delete' issue.pk %}" class="btn btn-danger"> Close issue </a>
+          <a href="{% url 'issue_edit' issue.pk %}" class="btn btn-success"> Edit issue </a>
+          <li> {{ issue.project }}</li>
+          <hr>
+        {% empty %}
+          <li>No issues found.</li>
+        {% endfor %}
+      </ul>
+      
+    </div>
+  </div>
+  {% endblock %}
